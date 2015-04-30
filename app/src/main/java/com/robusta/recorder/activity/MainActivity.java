@@ -32,6 +32,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        File file = new File(DIRECTORY);
+        file.mkdirs();
+        mRecMicToMp3 = new RecMicToMp3(DIRECTORY + FILENAME, 8000);
+        progressThread = new Thread(this);
+        recordingThread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                cP = 0;
+                while (true) {
+                    try {
+                        Thread.sleep(16);
+                        cP += 16;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+
+                        return;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return;
+                    }
+                    runOnUiThread(new Thread(new Runnable() {
+                        public void run() {
+                            String timer = "" + cP / 1000 / 60 + ":"
+                                    + (cP / 1000) % 60 + ":" + (cP % 1000) / 60;
+                            // progressTV2.setText(player.getCurrentPosition() *
+                            // 100.0
+                            // / player.getDuration() + "%");
+                            progressTV.setText(timer);
+                        }
+                    }));
+
+                }
+            }
+        });
     }
 
 

@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
 apply plugin: 'android-library'
@@ -13,15 +13,15 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         ndk {
             moduleName "mp3lame"
         }
-        minSdkVersion 14
-        targetSdkVersion 22
+        minSdkVersion 7
+        targetSdkVersion 19
     }
 
     packagingOptions {
